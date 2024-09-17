@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@Transactional
+
 public class UserServiceImp implements UserService {
 
     private final UserRep userRep;

@@ -16,7 +16,7 @@ import java.util.*;
 
 @Controller
 public class UserController {
-//!
+    //!
     @Autowired
     private UserService userService;
 
@@ -29,6 +29,7 @@ public class UserController {
         model.addAttribute("allRoles", roles);
         return "user-info2";
     }
+
     @RequestMapping("user/saveUser2")
     public String saveEmployee2(@Valid @ModelAttribute("user") User user,
                                 BindingResult bindingResult) {

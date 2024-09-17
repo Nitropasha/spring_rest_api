@@ -54,7 +54,7 @@ public class User implements UserDetails {
       this.roles = roles;
    }
 
-   // Getters and setters
+
    public Long getId() {
       return id;
    }

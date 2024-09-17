@@ -7,7 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.kata.spring.boot_security.demo.repository.RoleRep;
 import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.entity.User;
 
@@ -16,6 +15,7 @@ import ru.kata.spring.boot_security.demo.service.AdminService;
 
 import javax.validation.Valid;
 import java.util.List;
+
 @Controller
 public class AdminController {
 
