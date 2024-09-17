@@ -9,7 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.kata.spring.boot_security.demo.service.UserServes;
+import ru.kata.spring.boot_security.demo.service.SecurityUserDetailsService;
+import ru.kata.spring.boot_security.demo.service.UserServesImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -36,10 +37,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    private UserServes userServesTwo;
+    private SecurityUserDetailsService userServesImplTwo;
     @Autowired
-    public void setUserServesTwo(UserServes userServesTwo) {
-        this.userServesTwo = userServesTwo;
+    public void setUserServesTwo(SecurityUserDetailsService userServesImplTwo) {
+        this.userServesImplTwo = userServesImplTwo;
     }
 
     @Bean
@@ -51,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setPasswordEncoder(passwordEncoder());
-        authenticationProvider.setUserDetailsService(userServesTwo);
+        authenticationProvider.setUserDetailsService(userServesImplTwo);
         return authenticationProvider;
     }
 }

@@ -19,11 +19,15 @@ import java.util.Set;
 @Repository
 public class UserDaoImp implements UserDao {
 
+@PersistenceContext
+private final EntityManager entityManager;
 
-   @PersistenceContext
-   private EntityManager entityManager;
-   @Autowired
-   private RoleDao roleDao;
+   private final RoleDao roleDao;
+
+   public UserDaoImp(EntityManager entityManager, RoleDao roleDao) {
+      this.entityManager = entityManager;
+      this.roleDao = roleDao;
+   }
 
    @Override
    @SuppressWarnings("unchecked")
