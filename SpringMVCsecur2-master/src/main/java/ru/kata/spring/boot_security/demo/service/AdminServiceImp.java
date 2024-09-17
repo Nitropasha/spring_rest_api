@@ -10,6 +10,7 @@ import ru.kata.spring.boot_security.demo.repository.UserRep;
 import java.util.List;
 
 @Service
+@Transactional
 public class AdminServiceImp implements AdminService {
 
     private final UserRep userRep;
