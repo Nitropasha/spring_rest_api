@@ -9,9 +9,9 @@ import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRep;
 import ru.kata.spring.boot_security.demo.repository.UserRep;
 
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
+
 
 @Service
 
@@ -28,9 +28,6 @@ public class AdminServiceImp implements AdminService {
         this.passwordEncoder = passwordEncoder;
 
     }
-
-
-
 
     @Transactional
     @Override
@@ -62,12 +59,9 @@ public class AdminServiceImp implements AdminService {
         return userRep.findAll();
     }
 
-
-
     @Override
     public List<Role> getAllRoles() {
         return roleRep.findAll();
     }
-
 
 }

@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 import ru.kata.spring.boot_security.demo.repository.UserRep;
 import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.entity.User;
@@ -24,9 +24,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
     public SecurityUserDetailsService(UserRep userRep) {
         this.userRep = userRep;
     }
-    public User findByUserName(String username) {
-        return userRep.findByUsername(username);
-    }
+   
 
     public User findByEmail(String email) {
         return userRep.findByEmail(email);

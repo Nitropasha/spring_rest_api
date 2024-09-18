@@ -181,7 +181,9 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="deleteForm" method="get">
+                                <form id="deleteForm" method="post">
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
                                     <input type="hidden" id="idDelete" name="id"/>
 
                                     <div class="mb-3">
@@ -317,9 +319,9 @@
         modalEmail.value = email;
         modalAge.value = age;
 
-        // Обновляем action формы для удаления
+
         let form = document.getElementById('deleteForm');
-        form.action = '/admin/delete?id=' + id;
+        form.action = '/admin/delete';
     });
 </script>
 

@@ -1,20 +1,17 @@
-
-
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRep;
 import ru.kata.spring.boot_security.demo.repository.UserRep;
-import ru.kata.spring.boot_security.demo.service.UserService;
+
 
 import java.util.List;
-import java.util.Set;
+
 
 @Service
-
 public class UserServiceImp implements UserService {
 
     private final UserRep userRep;
@@ -25,11 +22,13 @@ public class UserServiceImp implements UserService {
         this.roleRep = roleRep;
     }
 
-
-
     public List<Role> getAllRoles() {
         return roleRep.findAll();
     }
 
+    @Override
+    public User findByEmail(String email) {
+        return userRep.findByEmail(email);
+    }
 
 }
