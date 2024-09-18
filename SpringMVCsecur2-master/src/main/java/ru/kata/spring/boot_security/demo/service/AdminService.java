@@ -7,7 +7,7 @@ import ru.kata.spring.boot_security.demo.entity.User;
 import java.util.List;
 
 public interface AdminService {
-    List<User> listUsers();
+//    List<User> listUsers();
 
     void saveUser(User user);
 
@@ -19,7 +19,5 @@ public interface AdminService {
 
     List<Role> getAllRoles();
 
-    User findByUserName(String string);
-    User roleNull (User user);
 
 }

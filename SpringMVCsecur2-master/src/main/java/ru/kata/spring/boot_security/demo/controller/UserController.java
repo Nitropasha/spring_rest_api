@@ -35,17 +35,6 @@ public class UserController {
         return "user-info2";
     }
 
-    @RequestMapping("user/saveUser2")
-    public String saveEmployee2(@Valid @ModelAttribute("user") User user,
-                                BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            return "user-info";
-        } else {
-            userService.roleNull(user);
-            userService.saveUser(user);
-            return "redirect:/user";
-        }
-    }
 
 }

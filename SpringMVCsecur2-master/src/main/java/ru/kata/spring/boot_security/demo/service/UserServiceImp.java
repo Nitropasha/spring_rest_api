@@ -26,28 +26,10 @@ public class UserServiceImp implements UserService {
     }
 
 
-    public User findByUserName(String username) {
-        return userRep.findByUsername(username);
-    }
-
-    @Transactional
-    @Override
-    public void saveUser(User user) {
-        userRep.save(user);
-    }
 
     public List<Role> getAllRoles() {
         return roleRep.findAll();
     }
 
-    @Override
-    public User roleNull(User user) {
-        Role userRole = roleRep.findById(1L)
-                .orElseThrow(() -> new RuntimeException("Role USER not found"));
-        user.setRoles(Set.of(userRole));
-        return user;
-    }
-    public List<User> allUsers() {
-        return userRep.findAll();
-    }
+
 }

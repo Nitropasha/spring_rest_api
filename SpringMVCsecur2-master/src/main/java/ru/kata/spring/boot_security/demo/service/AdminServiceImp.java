@@ -30,11 +30,7 @@ public class AdminServiceImp implements AdminService {
     }
 
 
-    @Transactional(readOnly = true)
-    @Override
-    public List<User> listUsers() {
-        return userRep.findAll();
-    }
+
 
     @Transactional
     @Override
@@ -67,22 +63,12 @@ public class AdminServiceImp implements AdminService {
         return userRep.findAll();
     }
 
-    @Override
-    public User roleNull(User user) {
-        Role userRole = roleRep.findById(1L)
-                .orElseThrow(() -> new RuntimeException("Role USER not found"));
-        Set<Role> roles = new HashSet<>();
-        roles.add(userRole);
-        user.setRoles(roles);
-        return user;
-    }
+
 
     @Override
     public List<Role> getAllRoles() {
         return roleRep.findAll();
     }
 
-    public User findByUserName(String username) {
-        return userRep.findByUsername(username);
-    }
+
 }
