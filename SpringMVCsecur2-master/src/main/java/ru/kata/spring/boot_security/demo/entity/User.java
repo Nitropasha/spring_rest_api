@@ -34,6 +34,9 @@ public class User implements UserDetails {
    @Column(name = "password")
    private String password;
 
+   @Column(name = "age")
+   private Integer age;
+
    // Связь многие ко многим с таблицей ролей
    @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(
@@ -45,13 +48,14 @@ public class User implements UserDetails {
 
    public User() {}
 
-   public User(String firstName, String lastName, String email, String username, String password, Set<Role> roles) {
+   public User(String firstName, String lastName, String email, String username, String password, Set<Role> roles, Integer age) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
       this.username = username;
       this.password = password;
       this.roles = roles;
+      this.age = age;
    }
 
 
@@ -110,7 +114,13 @@ public class User implements UserDetails {
    public void setRoles(Set<Role> roles) {
       this.roles = roles;
    }
+   public Integer getAge() {
+      return age;
+   }
 
+   public void setAge(Integer age) {
+      this.age = age;
+   }
    // Реализация методов UserDetails
    @Override
    public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -13,13 +13,13 @@ public interface AdminService {
 
     User getUser(Long id);
 
-    void deleteUser(Long id);
+   void deleteUser(Long id);
 
     List<User> allUsers();
 
     List<Role> getAllRoles();
 
     User findByUserName(String string);
-
+    User roleNull (User user);
 
 }

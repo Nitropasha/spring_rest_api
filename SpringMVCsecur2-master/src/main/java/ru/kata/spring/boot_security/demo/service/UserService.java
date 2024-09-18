@@ -10,4 +10,5 @@ public interface UserService {
     void saveUser(User user);
     User roleNull (User user);
     List<Role> getAllRoles();
+    List<User> allUsers();
 }

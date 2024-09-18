@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.entity.User;
@@ -24,9 +25,13 @@ public class AdminController {
     private AdminService adminService;
 
     @RequestMapping(value = "/admin")
-    public String printWelcome(Model model) {
+    public String printWelcome( Model model) {
         List<User> users = adminService.allUsers();
         model.addAttribute("users", users);
+        // Добавляем пустого пользователя для формы в модальном окне
+        model.addAttribute("user", new User());
+        List<Role> roles = adminService.getAllRoles();
+        model.addAttribute("allRoles", roles);
         return "users";
     }
 
@@ -39,18 +44,18 @@ public class AdminController {
         return "user-info";
     }
 
-    @RequestMapping("admin/saveUser")
-    public String saveEmployee(@Valid @ModelAttribute("user") User user,
-                               BindingResult bindingResult) {
+    @RequestMapping(value = "/admin/saveUser", method = RequestMethod.POST)
+    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "user-info";
+            // Если есть ошибки, вернуться на ту же страницу
+            return "users";
         } else {
+            // Если ID пользователя существует, обновляем данные, иначе создаем нового
             adminService.saveUser(user);
             return "redirect:/admin";
         }
     }
-
 
     @RequestMapping("admin/updateInfo")
     public String updateUser(@RequestParam("id") Long id, Model model) {

@@ -28,13 +28,21 @@ public class SecurityUserDetailsService implements UserDetailsService {
         return userRep.findByUsername(username);
     }
 
+    public User findByEmail(String email) {
+        return userRep.findByEmail(email);
+    }
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUserName(username);
-        if (user== null) {
-            throw new UsernameNotFoundException(String.format("User '%s' not founded", username));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = findByEmail(email); // Измените на поиск по email
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with email: " + email);
+
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthority(user.getRoles()));
+
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
+                user.getAuthorities());
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthority(Collection<Role> roles) {

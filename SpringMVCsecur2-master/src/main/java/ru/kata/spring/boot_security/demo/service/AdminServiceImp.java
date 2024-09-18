@@ -9,7 +9,9 @@ import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRep;
 import ru.kata.spring.boot_security.demo.repository.UserRep;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 
@@ -37,9 +39,14 @@ public class AdminServiceImp implements AdminService {
     @Transactional
     @Override
     public void saveUser(User user) {
+
+        System.err.println("вошли сюда " + user.getPassword().length());
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+        System.err.println("вошли сюда " + user.getPassword().length());
         userRep.save(user);
+
+
     }
 
     @Transactional(readOnly = true)
@@ -51,12 +58,23 @@ public class AdminServiceImp implements AdminService {
     @Transactional
     @Override
     public void deleteUser(Long id) {
+        System.err.println("ЮЗЕР НАЙДЕН" + id);
         userRep.deleteById(id);
     }
 
     @Override
     public List<User> allUsers() {
         return userRep.findAll();
+    }
+
+    @Override
+    public User roleNull(User user) {
+        Role userRole = roleRep.findById(1L)
+                .orElseThrow(() -> new RuntimeException("Role USER not found"));
+        Set<Role> roles = new HashSet<>();
+        roles.add(userRole);
+        user.setRoles(roles);
+        return user;
     }
 
     @Override

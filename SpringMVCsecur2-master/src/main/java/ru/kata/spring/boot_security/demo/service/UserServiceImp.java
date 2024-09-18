@@ -47,4 +47,7 @@ public class UserServiceImp implements UserService {
         user.setRoles(Set.of(userRole));
         return user;
     }
+    public List<User> allUsers() {
+        return userRep.findAll();
+    }
 }
