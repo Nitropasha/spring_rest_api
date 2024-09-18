@@ -35,14 +35,13 @@ public class AdminServiceImp implements AdminService {
     @Transactional
     @Override
     public void saveUser(User user) {
-
-        System.err.println("вошли сюда " + user.getPassword().length());
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        System.err.println("вошли сюда " + user.getPassword().length());
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
+        } else {
+            userRep.findById(user.getId()).ifPresent(existingUser -> user.setPassword(existingUser.getPassword()));
+        }
         userRep.save(user);
-
-
     }
 
     @Transactional(readOnly = true)

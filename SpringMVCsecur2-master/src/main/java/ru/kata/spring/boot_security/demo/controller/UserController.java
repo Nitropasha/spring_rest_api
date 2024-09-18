@@ -28,7 +28,6 @@ public class UserController {
     public String printUserPage(Principal principal, Model model) {
         User user = userRepository.findByEmail(principal.getName());
         System.err.println(principal.getName());
-
         model.addAttribute("user", user);
         List<Role> roles = userService.getAllRoles();
         model.addAttribute("allRoles", roles);
