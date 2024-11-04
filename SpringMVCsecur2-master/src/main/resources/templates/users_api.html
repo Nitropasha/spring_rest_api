@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management</title>
+
+    <!-- Подключаем Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light">
+    <!-- Темно-серая плашка с email и кнопкой logout -->
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <span class="navbar-text text-light">
+          <!-- Выводим email зашедшего пользователя -->
+          Logged in as:
+          <span th:text="${#authentication.name}">user@example.com</span> with
+          roles:
+          <span th:each="role, iterStat  : ${#authentication.authorities}">
+            <span th:text="${role.authority}"></span
+            ><span th:if="${!iterStat.last}">, </span>
+          </span>
+        </span>
+        <form th:action="@{/logout}" method="post" class="d-inline">
+          <button type="submit" class="btn btn-warning">Logout</button>
+        </form>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2 bg-white p-3 vh-100">
+            <h5>Navigation</h5>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" id="adminLink" href="#">ADMIN</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="userLink" href="#">USER</a>
+              </li>
+            </ul>
+          </div>
+
+          
+
+        <!-- Основной контент -->
+        <div class="col-md-10" >
+              <!-- Контент для USER -->
+
+            <div id="userContent" class="tab-content d-none">
+              <br><br><br>
+             <!-- Здесь может быть профиль пользователя -->
+             <h3 class="mb-4">User Profile</h3>
+             <table class="table table-hover table-bordered" id="mainTableWithOneUser">
+               <thead class="table-light">
+                 <tr>
+                   <th>ID</th>
+                   <th>First Name</th>
+                   <th>Last Name</th>
+                 
+                   <th>Email</th>
+                   <th>Roles</th>
+                  
+                 </tr>
+               </thead>
+               <tbody>
+               </tbody>
+             </table>
+             </div>
+
+            <div id="adminContent" class="tab-content">
+          <div class="container mt-5">
+            <!-- Заголовок -->
+            <h2 class="text-center mb-4">User Management</h2>
+
+            <!-- Навигационные вкладки -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link active"
+                  id="users-tab"
+                  data-bs-toggle="tab"
+                  href="#users"
+                  role="tab"
+                  aria-controls="users"
+                  aria-selected="true"
+                  >Users</a
+                >
+              </li>
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link"
+                  id="add-user-tab"
+                  data-bs-toggle="tab"
+                  href="#add-user"
+                  role="tab"
+                  aria-controls="add-user"
+                  aria-selected="false"
+                  >Add User</a
+                >
+              </li>
+            </ul>
+
+            <!-- Содержимое вкладок -->
+            <div class="tab-content mt-3" id="myTabContent">
+              <!-- Вкладка Users -->
+              <div
+                class="tab-pane fade show active"
+                id="users"
+                role="tabpanel"
+                aria-labelledby="users-tab"
+              >
+                <!-- Таблица пользователей -->
+                <h3 class="mb-4">All Users</h3>
+                <table class="table table-hover table-bordered" id="mainTableWithUsers">
+                  <thead class="table-light">
+                    <tr>
+                      <th>ID</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Age</th>
+                      <th>Email</th>
+                      <th>Roles</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+  
+              <!-- Вкладка Add User -->
+              <div
+                class="tab-pane fade"
+                id="add-user"
+                role="tabpanel"
+                aria-labelledby="add-user-tab"
+              >
+                <h3 class="mb-4">Add User</h3>
+              
+
+                  <form id="defaultSomeForm" data-hidden=true  >
+                    <input class="form-control" id="AddNewUserName" type="text" placeholder="firstName"><br>
+                    <input class="form-control" id="AddNewUserLastName" type="text" placeholder="lastName"><br>
+                    <input class="form-control" id="AddNewUserAge" type="number" placeholder="age"><br>
+                    <input class="form-control" id="AddNewUserEmail" type="text" placeholder="email"><br>
+                    <input class="form-control" id="AddNewUserNamebd" type="text" placeholder="username"><br>
+                    <input class="form-control" id="AddNewUserPassword" type="password" placeholder="password"><br>
+                     
+                    <label class="form-label">Roles:</label><br>
+                    <div id="rolesCheckboxes">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="roleUser" value='{"id":1,"authority":"USER"}'>
+                        <label class="form-check-label" for="roleUser">User</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="roleAdmin" value='{"id":2,"authority":"ADMIN"}'>
+                        <label class="form-check-label" for="roleAdmin">Admin</label>
+                      </div>
+                    </div>
+                    <button class="btn btn-primary mb-2" type="button" id="addNewUserButton">Add new user</button>
+                </form>
+
+                  
+                </form>
+              </div>
+            </div>
+        </div>
+
+            <!-- Модальное окно Delete -->
+           
+
+<!--скрытое дефолтное модальное окно -->
+<div class="modal fade" id="someDefaultModal" tabindex="-1" role="dialog" aria-labelledby="someDefaultModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close 
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+            </div>
+
+            <div class="modal-footer">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+ 
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+ 
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="app_fetch2.js"></script>
+   
+  </body>
+</html>
