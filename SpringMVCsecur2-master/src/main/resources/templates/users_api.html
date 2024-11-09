@@ -19,15 +19,9 @@
     <!-- Темно-серая плашка с email и кнопкой logout -->
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
-        <span class="navbar-text text-light">
+        <span class="navbar-text text-light" id="topuser">
           <!-- Выводим email зашедшего пользователя -->
-          Logged in as:
-          <span th:text="${#authentication.name}">user@example.com</span> with
-          roles:
-          <span th:each="role, iterStat  : ${#authentication.authorities}">
-            <span th:text="${role.authority}"></span
-            ><span th:if="${!iterStat.last}">, </span>
-          </span>
+
         </span>
         <form th:action="@{/logout}" method="post" class="d-inline">
           <button type="submit" class="btn btn-warning">Logout</button>

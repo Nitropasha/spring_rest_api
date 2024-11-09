@@ -1,9 +1,11 @@
 $(async function () {
     await getTableWithUsers();
     await getTableOneUser();
+    await getTableTopUser();
     getNewUserForm();
     getDefaultModal();
     addNewUser();
+
 });
 
 const userFetchService = {
@@ -61,6 +63,21 @@ async function getTableOneUser() {
             table.append(tableFilling);
         });
 }
+
+async function getTableTopUser() {
+  const list = document.querySelector('#topuser');
+  const response = await userFetchService.findAdminUser();
+  const user = await response.json();
+  const roles = user.roles.map((role) => role.authority).join(", ");
+
+  list.innerHTML = `
+      <div>
+        User: ${user.email}  Roles: ${roles}
+      </div>
+    `;
+
+}
+
 
 async function getTableWithUsers() {
     let table = $("#mainTableWithUsers tbody");
