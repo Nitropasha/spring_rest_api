@@ -13,137 +13,140 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements UserDetails {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-   @Column(name = "first_name")
-   @NotBlank(message = "Name is required field")
-   private String firstName;
+    @Column(name = "first_name")
+    @NotBlank(message = "Name is required field")
+    private String firstName;
 
-   @Column(name = "last_name")
-   @NotBlank(message = "Surname is required field")
-   private String lastName;
+    @Column(name = "last_name")
+    @NotBlank(message = "Surname is required field")
+    private String lastName;
 
-   @Column(name = "email", unique = true)
-   private String email;
+    @Column(name = "email", unique = true)
+    private String email;
 
-   @Column(name = "username", unique = true)
-   private String username;
+    @Column(name = "username", unique = true)
+    private String username;
 
-   @Column(name = "password")
-   private String password;
+    @Column(name = "password")
+    private String password;
 
-   @Column(name = "age")
-   private Integer age;
+    @Column(name = "age")
+    private Integer age;
 
-   // Связь многие ко многим с таблицей ролей
-   @ManyToMany(fetch = FetchType.LAZY)
-   @JoinTable(
-           name = "user_roles",
-           joinColumns = @JoinColumn(name = "user_id"),
-           inverseJoinColumns = @JoinColumn(name = "role_id")
-   )
-   private Set<Role> roles = new HashSet<>();
+    // Связь многие ко многим с таблицей ролей
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
-   public User() {}
+    public User() {
+    }
 
-   public User(String firstName, String lastName, String email, String username, String password, Set<Role> roles, Integer age) {
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.email = email;
-      this.username = username;
-      this.password = password;
-      this.roles = roles;
-      this.age = age;
-   }
+    public User(String firstName, String lastName, String email, String username, String password, Set<Role> roles, Integer age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+        this.age = age;
+    }
 
 
-   public Long getId() {
-      return id;
-   }
+    public Long getId() {
+        return id;
+    }
 
-   public void setId(Long id) {
-      this.id = id;
-   }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-   public String getFirstName() {
-      return firstName;
-   }
+    public String getFirstName() {
+        return firstName;
+    }
 
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
-   }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-   public String getLastName() {
-      return lastName;
-   }
+    public String getLastName() {
+        return lastName;
+    }
 
-   public void setLastName(String lastName) {
-      this.lastName = lastName;
-   }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-   public String getEmail() {
-      return email;
-   }
+    public String getEmail() {
+        return email;
+    }
 
-   public void setEmail(String email) {
-      this.email = email;
-   }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-   public String getUsername() {
-      return username;
-   }
+    public String getUsername() {
+        return username;
+    }
 
-   public void setUsername(String username) {
-      this.username = username;
-   }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-   public String getPassword() {
-      return password;
-   }
+    public String getPassword() {
+        return password;
+    }
 
-   public void setPassword(String password) {
-      this.password = password;
-   }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-   public Set<Role> getRoles() {
-      return roles;
-   }
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
-   public void setRoles(Set<Role> roles) {
-      this.roles = roles;
-   }
-   public Integer getAge() {
-      return age;
-   }
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
-   public void setAge(Integer age) {
-      this.age = age;
-   }
-   // Реализация методов UserDetails
-   @Override
-   public Collection<? extends GrantedAuthority> getAuthorities() {
-      return roles;
-   }
+    public Integer getAge() {
+        return age;
+    }
 
-   @Override
-   public boolean isAccountNonExpired() {
-      return true;
-   }
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
-   @Override
-   public boolean isAccountNonLocked() {
-      return true;
-   }
+    // Реализация методов UserDetails
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
 
-   @Override
-   public boolean isCredentialsNonExpired() {
-      return true;
-   }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-   @Override
-   public boolean isEnabled() {
-      return true;
-   }
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

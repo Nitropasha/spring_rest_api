@@ -6,11 +6,7 @@ import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.entity.User;
 
 @Repository
-public interface UserRep extends JpaRepository<User,Long> {
-
-
+public interface UserRep extends JpaRepository<User, Long> {
     @Query("Select u from User u left join fetch u.roles where u.email=:email")
     User findByEmail(String email); // Поиск по email
-
-
 }

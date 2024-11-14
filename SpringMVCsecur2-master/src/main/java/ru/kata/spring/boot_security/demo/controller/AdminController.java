@@ -5,10 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AdminController {
-
     @GetMapping("/printapi")
     public String printApi() {
         return "users_api";
     }
-
 }

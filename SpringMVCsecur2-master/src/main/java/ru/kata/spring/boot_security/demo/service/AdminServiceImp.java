@@ -26,7 +26,6 @@ public class AdminServiceImp implements AdminService {
         this.userRep = userRep;
         this.roleRep = roleRep;
         this.passwordEncoder = passwordEncoder;
-
     }
 
     @Transactional
@@ -59,11 +58,8 @@ public class AdminServiceImp implements AdminService {
         return userRep.findAll();
     }
 
-
-
     @Override
     public List<Role> getAllRoles() {
         return roleRep.findAll();
     }
-
 }

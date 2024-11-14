@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.restcontroller;
+package ru.kata.spring.boot_security.demo.controller;
 
 
 import org.springframework.http.HttpStatus;
@@ -14,13 +14,11 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
-public class MyRestController {
-
+public class ApiController {
     private final AdminService adminService;
-
     private final UserService userService;
 
-    public MyRestController(AdminService adminService, UserService userService) {
+    public ApiController(AdminService adminService, UserService userService) {
         this.adminService = adminService;
         this.userService = userService;
     }
@@ -40,30 +38,28 @@ public class MyRestController {
         return users;
     }
 
-
     @GetMapping("/users/{id}")
     public User getUser(@PathVariable long id) {
         User user = adminService.getUser(id);
         return user;
     }
-    @CrossOrigin
-    @PutMapping("/users")
-    public User updateUser(@RequestBody User user) {
-        adminService.saveUser(user);
-        return  user;
-    }
 
-    @PostMapping("/users")
-    public User addNewEmployee (@RequestBody User user) {
+    @PutMapping("/users/{id}")
+    public User updateUser(@PathVariable long id, @RequestBody User user) {
+        user.setId(id);
         adminService.saveUser(user);
         return user;
     }
-    @CrossOrigin
+
+    @PostMapping("/users")
+    public User addNewUser(@RequestBody User user) {
+        adminService.saveUser(user);
+        return user;
+    }
+
     @DeleteMapping("/users/{id}")
-    public String deleteUser (@PathVariable long id) {
-        User user = adminService.getUser(id);
+    public String deleteUser(@PathVariable long id) {
         adminService.deleteUser(id);
         return "OK ALL RIGHT";
     }
-
 }

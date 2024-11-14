@@ -9,20 +9,18 @@ import java.util.Set;
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "name", unique = true)
     private String authority;
-
     // Обратная связь с пользователями
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<User> users;
 
-    public Role() {}
+    public Role() {
+    }
 
     public Role(String authority) {
         this.authority = authority;
@@ -82,6 +80,4 @@ public class Role implements GrantedAuthority {
             return false;
         return true;
     }
-
-
 }

@@ -24,7 +24,6 @@ public class SecurityUserDetailsService implements UserDetailsService {
     public SecurityUserDetailsService(UserRep userRep) {
         this.userRep = userRep;
     }
-   
 
     public User findByEmail(String email) {
         return userRep.findByEmail(email);
@@ -36,7 +35,6 @@ public class SecurityUserDetailsService implements UserDetailsService {
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found with email: " + email);
-
         }
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),

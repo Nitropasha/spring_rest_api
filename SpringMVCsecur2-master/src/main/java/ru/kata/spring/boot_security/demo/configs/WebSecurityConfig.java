@@ -38,7 +38,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-
     private SecurityUserDetailsService userServesImplTwo;
 
     @Autowired

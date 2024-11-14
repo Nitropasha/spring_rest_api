@@ -24,8 +24,8 @@ const userFetchService = {
             headers: userFetchService.head,
             body: JSON.stringify(user),
         }),
-    updateUser: async (user) =>
-        await fetch(`http://localhost:8080/api/users`, {
+    updateUser: async (user, id) =>
+        await fetch(`http://localhost:8080/api/users/${id}`, {
             method: "PUT",
             headers: userFetchService.head,
             body: JSON.stringify(user),

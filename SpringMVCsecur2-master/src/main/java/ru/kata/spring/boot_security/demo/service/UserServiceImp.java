@@ -13,7 +13,6 @@ import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService {
-
     private final UserRep userRep;
     private final RoleRep roleRep;
 
