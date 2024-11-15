@@ -19,8 +19,7 @@ public class Role implements GrantedAuthority {
     @JsonIgnore
     private Set<User> users;
 
-    public Role() {
-    }
+    public Role() {}
 
     public Role(String authority) {
         this.authority = authority;
